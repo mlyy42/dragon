@@ -1,0 +1,103 @@
+#include <stdio.h>
+
+int skip(int al) {
+	int wup;
+	printf("이어서 하실 구간을 선택하세요.\n");//알 종류에 따라 루트 다르게 갈 수 있게 중간저장
+}
+
+int eg(int al) {
+	printf("\n알이 부화할 수 있도록 따뜻하게 해주세요!\n");
+	printf("@을 입력하면 알이 따뜻해 집니다!\n");
+	char ch = 0;
+	for (int i = 0; i < 10; i++) {
+		printf("\n입력하세요 : ");
+		ch = getchar();
+		ch = getchar();
+
+		if (ch == '@') {
+			printf("따뜻함 +1\n");
+		}
+		else {
+			printf("실패했어요..\n");
+			i--;
+		}
+	}
+
+	printf("\n알이 움직이기 시작합니다...!\n");
+
+	return 0;
+}
+
+int org(int al) {
+	int hp = 50, mp = 30;
+	printf("\n초록눈에 주황빛 비늘을 가진 용이 태어났습니다!\n");
+	printf("\n-----상태창-----\n\n종류: \n\n현재 상태: 영유아기\n\nHP: %d\nMP: %d\n\n전용 스킬: ", hp, mp);
+}
+
+int blu(int al) {
+	int hp = 50, mp = 30;
+	printf("\n하늘색 눈에 회색빛 털을 가진 용이 태어났습니다!\n");
+	printf("\n-----상태창-----\n\n종류: \n\n현재 상태: 영유아기\n\nHP: %d\nMP: %d\n\n전용 스킬: ", hp, mp);
+}
+
+int money() {
+	char kira, che[10];
+	int zero = 0;
+	printf("\n\n$를 입력하면 현재 재화를 확인할 수 있습니다.\n");
+	printf("입력하세요: ");
+	kira = getchar();
+	kira = getchar();
+	if (kira == '$') {
+		printf("\n현재 남은 재화: %d", zero);
+	}
+	else printf("\n입력 오류");
+	printf("\n\n재화는 특정 구간에서만 확인하실 수 있습니다.\n");
+
+	return 0;
+}
+
+int dun() {
+	char start;
+	printf("\n재화는 던전에서 얻을 수 있습니다.\n");
+	printf("\n던전에 입장 하시겠습니까?(y/n): ");
+	start = getchar();
+	start = getchar();
+	if (start == 'y') {
+		printf("\n던전에 입장하였습니다!");
+	}
+	else if (start == 'n') {
+		printf("입장 실패...");
+	}
+	else printf("입력 오류");
+	return 0;
+}
+//다른거 입력했을 때 새로하기 뜨는 오류 수정하기
+int main() {
+	int start, al;
+	printf("1.주황무늬에 은은한 초록빛이 도는 알\n2.회색에 하늘색 무늬를 가진 알\n\n");
+	printf("어떤 알을 키울까요? : ");
+	scanf_s("%d", &al);
+	printf("1.새로하기\n2.이어하기\n(tip: 처음 하신다면 새로하기를 선택하세요.)");
+	scanf_s("%d", &start);
+	if (start == 1) {
+		return 0;
+	}
+	else if (start == 2) {
+		skip(al);
+	}
+	if (al == 1) {
+		printf("\n1번 알을 선택하셨습니다!\n");
+		eg(al);
+		org(al);
+		money();
+		dun();
+	}
+	else if (al == 2) {
+		printf("2번 알을 선택하셨습니다!\n");
+		eg(al);
+		blu(al);
+		money();
+		dun();
+	}
+	else printf("입력 오류");
+}
