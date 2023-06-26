@@ -1,0 +1,25 @@
+#include "de.h"
+
+int main() {
+	int start, al;
+	int hp=50, mp=30;
+	int exp=0;
+	printf("1.주황무늬에 은은한 초록빛이 도는 알\n2.회색에 하늘색 무늬를 가진 알\n\n");
+	printf("어떤 알을 키울까요? : ");
+	scanf_s("%d", &al);
+	if (al == 1) {
+		printf("\n1번 알을 선택하셨습니다!\n");
+		eg();
+		org(al,hp,mp,exp);
+		dun(al,hp,mp,exp);
+		Exp(exp);
+	}
+	else if (al == 2) {
+		printf("2번 알을 선택하셨습니다!\n");
+		eg();
+		blu(al,hp,mp,exp);
+		dun(al,hp,mp,exp);
+		Exp(exp);
+	}
+	else printf("입력 오류");
+}
