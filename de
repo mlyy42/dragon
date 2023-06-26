@@ -1,0 +1,12 @@
+//#pragma once
+
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <time.h>
+
+int eg(); //부화할 수 있도록 따뜻하게
+int org(int al, int* hp, int* mp); //1번 용
+int blu(int al, int* hp, int* mp); //2번 용
+int dun(int al, int* hp, int* mp,int* exp); //던전
+int Exp(int* exp); //경험치 레벨 업
