@@ -1,0 +1,336 @@
+#include "de.h"
+
+int eg() {
+	printf("\n알이 부화할 수 있도록 따뜻하게 해주세요!\n");
+	printf("@을 입력하면 알이 따뜻해 집니다!\n");
+	char ch = 0;
+	for (int i = 0; i < 5; i++) {
+		printf("\n입력하세요 : ");
+		ch = getchar();
+		ch = getchar();
+
+		if (ch == '@') {
+			printf("따뜻함 +1\n");
+		}
+		else {
+			printf("실패했어요..\n");
+			i--;
+		}
+	}
+
+	printf("\n알이 움직이기 시작합니다...!\n");
+	Sleep(500);
+
+	for (int i = 0; i < 3; i++) {
+		printf(".\n");
+		Sleep(1000);
+	}
+
+	return 0;
+}
+
+int org(int al,int* hp,int* mp) {
+	int lv=1;
+	char name[100];
+	printf("\n초록눈에 주황빛 비늘을 가진 용이 태어났습니다!\n");
+	Sleep(1000);
+	printf("\n이름을 지어주세요: ");
+	scanf_s("%s", name,sizeof(name));
+	Sleep(1000);
+	printf("\n -----상태창-----\n\n ㅣ 이름: %s\n\n ㅣ 종류: 염룡 \n\n ㅣ 현재 상태: 영유아기\n\n ㅣ Level: %d\n\n ㅣ HP: %d\n ㅣ MP: %d\n\n ㅣ 전용 스킬: \n    염화(Lv.1): 3초 간 불을 내뿜으며 \n    총 10의 피해를 줍니다.", name, lv, hp, mp);
+	Sleep(1000);
+
+	return hp,mp;
+}
+
+int blu(int al,int* hp,int* mp) {
+	int lv=1;
+	char name[100];
+	printf("\n하늘색 눈에 회색빛 털을 가진 용이 태어났습니다!\n");
+	Sleep(1000);
+	printf("\n이름을 지어주세요: ");
+	scanf_s("%s", name,sizeof(name));
+	Sleep(1000);
+	printf("\n-----상태창-----\n\n l 이름: %s\n\n l 종류: 빙룡\n\n l 현재 상태: 영유아기\n\n l Level: %d\n\n l HP: %d\n l MP: %d\n\n l 전용 스킬: \n    빙화(Lv.1): 3초 간 상대를 얼리며\n    총 10의 피해를 줍니다.", name, lv, hp, mp);
+	Sleep(1000);
+
+
+	return hp,mp;
+}
+
+int dun(int al, int* hp, int* mp,int* exp) {
+	printf("\n\nExp를 통해 Level을 올릴 수 있습니다.\n");
+	printf("Exp는 던전에서 획득 가능합니다.\n");
+	char start;
+	int fig, slmhp = 30, spihp = 30, skelhp = 30, zomhp = 30, turn = 1;
+	srand((unsigned) time(NULL));
+	char mon[100][100] = { "슬라임", "거미" ,"스켈레톤", "좀비" };
+	int random = rand() % 3;
+	int demi = rand() % 2;
+	Sleep(1000);
+	printf("\n\n던전에 입장 하시겠습니까?(y/n): ");
+	start = getchar();
+	start = getchar();
+	if (start == 'y') {
+		printf("\n던전에 입장하였습니다!");
+		for (int i = 0; i < 3; i++) {
+			printf("\n.");
+			Sleep(1000);
+		};
+		printf("\n%s이/가 나타났다!", mon[random]);
+		printf("\n1.전투하기 2.도망치기\n");
+		printf("입력하세요: ");
+		scanf_s("%d", &fig,sizeof(fig));
+
+		if (fig == 1) {
+			if (strcmp(mon[random], "슬라임") == 0) {
+				while (1) {
+					if (turn % 2 == 1) {
+						turn++;
+						int slm[100][100] = { "박치기","달라붙기","흡수" };
+						if (strcmp(slm[demi],"박치기") == 0) {
+							printf("슬라임의 박치기...! \n");
+							Sleep(1000);
+							printf("HP -10\n");
+							*hp -= 10;
+						}
+						else if (strcmp(slm[demi], "달라붙기") == 1) {
+							printf("슬라임의 달라붙기...!\n");
+							Sleep(1000);
+							printf("한 턴 공격불가\n");
+							turn--;
+						}
+						else /*if (strcmp(slm[demi], "흡수") == 2)*/ {
+							printf("슬라임의 흡수...!\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							Sleep(1000);
+							printf("슬라임의 HP +5\n");
+							*hp -= 5;
+							slmhp += 5;
+						}
+					}
+					else {
+						if (al == 1) {
+							printf("'염화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("슬라임의 HP -10\n");
+							*mp -= 10;
+							slmhp -= 10;
+						}
+						else {
+							printf("'빙화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("슬라임의 HP -10\n");
+							*mp -= 10;
+							slmhp -= 10;
+						}
+					}
+					if (*hp == 0) {
+						printf("GAME OVER");
+						break;
+					}
+					else if (slmhp == 0) {
+						printf("슬라임을/를 해치웠습니다!\n");
+						printf("Exp +10\n");
+						*exp += 10;
+						break;
+					}
+				}
+			}
+
+			else if (strcmp(mon[random], "거미") == 0) {
+				while (1) {
+					if (turn % 2 == 1) {
+						turn++;
+						int spi[100][100] = { "물기","묶기","독뿜기" };
+						if (strcmp(spi[demi], "물기") == 0) {
+							printf("거미의 물기...!\n");
+							Sleep(1000);
+							printf("HP -10\n");
+							*hp -= 10;
+						}
+						else if (strcmp(spi[demi], "묶기") == 1) {
+							printf("거미의 묶기...!\n");
+							Sleep(1000);
+							printf("한 턴 공격불가]\n");
+							turn--;
+						}
+						else /*if (strcmp(spi[demi], "독뿜기") == 2)*/ {
+							printf("거미의 독뿜기...!\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							*hp -= 15;
+						}
+					}
+					else {
+						if (al == 1) {
+							printf("'염화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("거미의 HP -10\n");
+							*mp -= 10;
+							spihp -= 10;
+						}
+						else {
+							printf("'빙화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("거미의 HP -10\n");
+							*mp -= 10;
+							spihp -= 10;
+						}
+					}
+					if (*hp == 0) {
+						printf("GAME OVER");
+						break;
+					}
+					else if (spihp == 0) {
+						printf("거미을/를 해치웠습니다!\n");
+						printf("Exp +10\n");
+						*exp += 10;
+						break;
+					}
+				}
+			}
+
+			else if (strcmp(mon[random], "스켈레톤") == 0) {
+				while (1) {
+					if (turn % 2 == 1) {
+						turn++;
+						int skel[100][100] = { "창던지기","얼음화살쏘기","불화살쏘기" };
+						if (strcmp(skel[demi], "창던지기") == 0) {
+							printf("스켈레톤의 창던지기...!\n");
+							Sleep(1000);
+							printf("HP -10\n");
+							*hp -= 10;
+						}
+						else if (strcmp(skel[demi], "얼음화살쏘기") == 1) {
+							printf("스켈레톤의 얼음화살쏘기...!\n");
+							Sleep(1000);
+							printf("한 턴 공격불가\n");
+							turn--;
+						}
+						else /*if (strcmp(skel[demi], "불화살쏘기") == 2)*/ {
+							printf("스켈레톤의 불화살쏘기...!\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							Sleep(1000);
+							printf("HP -5\n");
+							*hp -= 15;
+						}
+					}
+					else {
+						if (al == 1) {
+							printf("'염화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("스켈레톤의 HP -10\n");
+							*mp -= 10;
+							skelhp -= 10;
+						}
+						else {
+							printf("'빙화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("스켈레톤의 HP -10\n");
+							*mp -= 10;
+							skelhp -= 10;
+						}
+					}
+					if (*hp == 0) {
+						printf("GAME OVER");
+						break;
+					}
+					else if (skelhp == 0) {
+						printf("스켈레톤을/를 해치웠습니다!\n");
+						printf("Exp +10\n");
+						*exp += 10;
+							break;
+					}
+				}
+			}
+
+			else  if (strcmp(mon[random], "좀비") == 0) {
+				while (1) {
+					if (turn % 2 == 1) {
+						turn++;
+						int zom[100][100] = { "할퀴기","감염시키기","물기" };
+						if (strcmp(zom[demi], "할퀴기") == 0) {
+							printf("좀비의 할퀴기...!\n");
+							Sleep(1000);
+							printf("HP -10\n");
+							*hp -= 10;
+						}
+						else if (strcmp(zom[demi], "감염시키기") == 1) {
+							printf("좀비의 감염시키기...!\n");
+							Sleep(1000);
+							printf("한 턴 공격불가\n");
+							turn--;
+						}
+						else /*if (strcmp(zom[demi], "물기") == 2)*/ {
+							printf("좀비의 물기...!\n");
+							Sleep(1000);
+							printf("HP -20\n");
+							*hp -= 20;
+						}
+					}
+					else {
+						if (al == 1) {
+							printf("'염화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("좀비의 HP -10\n");
+							*mp -= 10;
+							zomhp -= 10;
+						}
+						else {
+							printf("'빙화' 발동\n");
+							Sleep(1000);
+							printf("MP -10\n");
+							Sleep(1000);
+							printf("좀비의 HP -10\n");
+							*mp -= 10;
+							zomhp -= 10;
+						}
+					}
+					if (*hp == 0) {
+						printf("GAME OVER");
+						break;
+					}
+					else if (zomhp == 0) {
+						printf("좀비을/를 해치웠습니다!\n");
+						printf("Exp +10\n");
+						*exp += 10;
+						break;
+					}
+				}
+			}
+			return hp,mp,exp;
+		}
+		else if (start == 'n') {
+			printf("\n입장 실패...");
+		}
+		else printf("입력 오류");
+		return 0;
+	}
+}
+
+int Exp(int* exp) {
+	printf("던전에서 획득한 총 경험치: %d", exp);
+}
